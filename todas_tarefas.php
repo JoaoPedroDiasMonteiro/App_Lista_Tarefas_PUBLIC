@@ -1,3 +1,8 @@
+<?
+$acao = 'recuperar';
+require "./tarefa_controller.php";
+?>
+
 <html>
 
 <head>
