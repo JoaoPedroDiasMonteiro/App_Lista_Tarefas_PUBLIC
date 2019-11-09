@@ -29,7 +29,7 @@ require "./tarefa_controller.php";
 			// create elements
 			// form
 			let form = document.createElement('form')
-			form.action = 'tarefa_controller.php?acao=atualizar'
+			form.action = 'tarefa_controller.php?acao=atualizar&pag=todas_tarefas.php'
 			form.method = 'post'
 			form.className = 'row'
 			// input
@@ -61,11 +61,11 @@ require "./tarefa_controller.php";
 		}
 
 		function remover(id) {
-			location.href = 'tarefa_controller.php?acao=remover&id=' + id
+			location.href = 'tarefa_controller.php?pag=todas_tarefas.php&acao=remover&id=' + id
 		}
 
 		function marcarRealizada(id) {
-			location.href = 'tarefa_controller.php?acao=marcarRealizada&id=' + id
+			location.href = 'tarefa_controller.php?pag=todas_tarefas.php&acao=marcarRealizada&id=' + id
 		}
 	</script>
 </head>
@@ -87,6 +87,7 @@ require "./tarefa_controller.php";
 					<li class="list-group-item"><a href="index.php">Tarefas pendentes</a></li>
 					<li class="list-group-item"><a href="nova_tarefa.php">Nova tarefa</a></li>
 					<li class="list-group-item active"><a href="#">Todas tarefas</a></li>
+					<li class="list-group-item"><a href="tarefas_realizadas.php">Tarefas realizadas</a></li>
 				</ul>
 			</div>
 

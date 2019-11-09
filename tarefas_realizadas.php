@@ -18,7 +18,7 @@ require "./tarefa_controller.php";
 			// create elements
 			// form
 			let form = document.createElement('form')
-			form.action = 'tarefa_controller.php?acao=atualizar&pag=index.php'
+			form.action = 'tarefa_controller.php?acao=atualizar&pag=tarefas_realizadas.php'
 			form.method = 'post'
 			form.className = 'row'
 			// input
@@ -50,11 +50,11 @@ require "./tarefa_controller.php";
 		}
 
 		function remover(id) {
-			location.href = 'tarefa_controller.php?pag=index.php&acao=remover&id=' + id
+			location.href = 'tarefa_controller.php?pag=tarefas_realizadas.php&acao=remover&id=' + id
 		}
 
 		function marcarRealizada(id) {
-			location.href = 'tarefa_controller.php?pag=index.php&acao=marcarRealizada&id=' + id
+			location.href = 'tarefa_controller.php?pag=tarefas_realizadas.php&acao=marcarRealizada&id=' + id
 		}
 	</script>
 </head>
@@ -73,10 +73,11 @@ require "./tarefa_controller.php";
 		<div class="row">
 			<div class="col-md-3 menu">
 				<ul class="list-group">
-					<li class="list-group-item active"><a href="#">Tarefas pendentes</a></li>
+					<li class="list-group-item"><a href="index.php">Tarefas pendentes</a></li>
 					<li class="list-group-item"><a href="nova_tarefa.php">Nova tarefa</a></li>
-					<li class="list-group-item"><a href="todas_tarefas.php">Todas tarefas</a></li>
-					<li class="list-group-item"><a href="tarefas_realizadas.php">Tarefas realizadas</a></li>
+                    <li class="list-group-item"><a href="todas_tarefas.php">Todas tarefas</a></li>
+					<li class="list-group-item active"><a href="#.php">Tarefas realizadas</a></li>
+                    
 				</ul>
 			</div>
 
@@ -88,7 +89,7 @@ require "./tarefa_controller.php";
 							<hr />
 
 							<? foreach ($tarefas as $key => $value) { ?>
-								<? if ($value->status == 'pendente') { ?>
+								<? if ($value->status == 'realizado') { ?>
 									<!-- row -->
 									<div class="row mb-3 d-flex align-items-center tarefa py-5" style="background-color:#f2f2f2">
 
@@ -99,8 +100,6 @@ require "./tarefa_controller.php";
 										<!-- button(s) -->
 										<div class="col-sm-3 d-flex mt-3 mt-sm-0 justify-content-end">
 											<i class="fas fa-trash-alt fa-lg text-danger ml-sm-auto" onclick="remover(<?= $value->id ?>)"></i>
-											<i class="fas fa-edit fa-lg text-info ml-auto" onclick="editar(<?= $value->id ?>, '<?= $value->tarefa ?>' )"></i>
-											<i class="fas fa-check-square fa-lg text-success ml-auto" onclick="marcarRealizada(<?= $value->id ?>)"></i>
 										</div>
 
 									</div>
