@@ -15,7 +15,7 @@ require "./tarefa_controller.php";
 	<title>App Lista Tarefas</title>
 	<style>
 		form {
-			margin-block-end: 0px ;
+			margin-block-end: 0px;
 			/* padding-left: 15px; */
 			padding: 0px 15px;
 		}
@@ -25,44 +25,48 @@ require "./tarefa_controller.php";
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	<script>
-	function editar(id, tarefa_txt) {		
-		// create elements
-		// form
-		let form = document.createElement('form')
-		form.action = 'tarefa_controller.php?acao=atualizar'
-		form.method = 'post'
-		form.className = 'row'
-		// input
-		let input = document.createElement('input')
-		input.type ='text'
-		input.name = 'tarefa'
-		input.className = 'col-8 col-md-9 form-control'
-		input.value = tarefa_txt
-		// input hidden
-		let input_id = document.createElement('input')
-		input_id.type = 'hidden'
-		input_id.name = 'id'
-		input_id.value = id
-		// button
-		let button = document.createElement('button')
-		button.type = 'submit'
-		button.className = 'col-4 col-md-3 btn btn-info'
-		button.innerHTML = 'Atualizar'
+		function editar(id, tarefa_txt) {
+			// create elements
+			// form
+			let form = document.createElement('form')
+			form.action = 'tarefa_controller.php?acao=atualizar'
+			form.method = 'post'
+			form.className = 'row'
+			// input
+			let input = document.createElement('input')
+			input.type = 'text'
+			input.name = 'tarefa'
+			input.className = 'col-8 col-md-9 form-control'
+			input.value = tarefa_txt
+			// input hidden
+			let input_id = document.createElement('input')
+			input_id.type = 'hidden'
+			input_id.name = 'id'
+			input_id.value = id
+			// button
+			let button = document.createElement('button')
+			button.type = 'submit'
+			button.className = 'col-4 col-md-3 btn btn-info'
+			button.innerHTML = 'Atualizar'
 
-		// add elements to form
-		form.appendChild(input)
-		form.appendChild(button)
-		form.appendChild(input_id)
+			// add elements to form
+			form.appendChild(input)
+			form.appendChild(button)
+			form.appendChild(input_id)
 
-		// add form to page
-		let tarefa = document.getElementById('tarefa_'+id)
-		tarefa.innerHTML = ''
-		tarefa.insertBefore(form, tarefa[0])
-	}
+			// add form to page
+			let tarefa = document.getElementById('tarefa_' + id)
+			tarefa.innerHTML = ''
+			tarefa.insertBefore(form, tarefa[0])
+		}
 
-	function remover(id) {
-		location.href= 'tarefa_controller.php?acao=remover&id='+id
-	}
+		function remover(id) {
+			location.href = 'tarefa_controller.php?acao=remover&id=' + id
+		}
+
+		function marcarRealizada(id) {
+			location.href = 'tarefa_controller.php?acao=marcarRealizada&id=' + id
+		}
 	</script>
 </head>
 
@@ -95,11 +99,16 @@ require "./tarefa_controller.php";
 							<? foreach ($tarefas as $key => $value) { ?>
 
 								<div class="row mb-3 d-flex align-items-center tarefa py-5" style="background-color:#f2f2f2">
-									<div class="col-sm-9" id= '<?= 'tarefa_'.$value->id ?>'> <?= $value->tarefa ?> (<?= $value->status ?>)</div>
-									<div class="col-sm-3 d-flex mt-3 mt-sm-0 justify-content-between">
-										<i class="fas fa-trash-alt fa-lg text-danger" onclick="remover(<?= $value->id ?>)"></i>
-										<i class="fas fa-edit fa-lg text-info" onclick="editar(<?= $value->id ?>, '<?= $value->tarefa ?>' )"></i>
-										<i class="fas fa-check-square fa-lg text-success"></i>
+									<div class="col-sm-9" id='<?= 'tarefa_' . $value->id ?>'>
+										<?= $value->tarefa ?> (<?= $value->status ?>)
+									</div>
+									<div class="col-sm-3 d-flex mt-3 mt-sm-0 justify-content-end">
+										<i class="fas fa-trash-alt fa-lg text-danger ml-sm-auto" onclick="remover(<?= $value->id ?>)"></i>
+										<? if ($value->status == 'pendente') { ?>
+
+											<i class="fas fa-edit fa-lg text-info ml-auto" onclick="editar(<?= $value->id ?>, '<?= $value->tarefa ?>' )"></i>
+											<i class="fas fa-check-square fa-lg text-success ml-auto" onclick="marcarRealizada(<?= $value->id ?>)"></i>
+										<? } ?>
 									</div>
 								</div>
 
