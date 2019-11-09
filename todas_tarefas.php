@@ -59,6 +59,10 @@ require "./tarefa_controller.php";
 		tarefa.innerHTML = ''
 		tarefa.insertBefore(form, tarefa[0])
 	}
+
+	function remover(id) {
+		location.href= 'tarefa_controller.php?acao=remover&id='+id
+	}
 	</script>
 </head>
 
@@ -93,7 +97,7 @@ require "./tarefa_controller.php";
 								<div class="row mb-3 d-flex align-items-center tarefa py-5" style="background-color:#f2f2f2">
 									<div class="col-sm-9" id= '<?= 'tarefa_'.$value->id ?>'> <?= $value->tarefa ?> (<?= $value->status ?>)</div>
 									<div class="col-sm-3 d-flex mt-3 mt-sm-0 justify-content-between">
-										<i class="fas fa-trash-alt fa-lg text-danger"></i>
+										<i class="fas fa-trash-alt fa-lg text-danger" onclick="remover(<?= $value->id ?>)"></i>
 										<i class="fas fa-edit fa-lg text-info" onclick="editar(<?= $value->id ?>, '<?= $value->tarefa ?>' )"></i>
 										<i class="fas fa-check-square fa-lg text-success"></i>
 									</div>
